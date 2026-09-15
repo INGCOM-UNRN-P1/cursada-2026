@@ -2,14 +2,17 @@
 
 /*
  * SITUACION: Condicional switch-case estructurado.
- * EXPLICACION: Selecciona una rama de ejecucion segun el valor de un entero o caracter.
- * Cada caso finaliza con 'break' para evitar la ejecucion en cascada no deseada.
+ * EXPLICACION: Selecciona una rama de ejecucion segun el valor de un entero o
+ * caracter.Cada caso finaliza con 'break' para evitar la ejecucion en cascada
+ * no deseada.
  */
 
-int main(void) {
+int main(void)
+{
     char opcion = 'B';
 
-    switch (opcion) {
+    switch (opcion)
+    {
         case 'A':
             printf("Opcion A seleccionada\n");
             break;

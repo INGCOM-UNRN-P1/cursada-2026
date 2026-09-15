@@ -27,9 +27,7 @@ int main(void)
     int arreglo[1000] = {};
     size_t longitu = largo(arreglo);
 
-    printf("calculo : %zu\n", 
-        sizeof(arreglo) / sizeof(arreglo[0]));
-    printf("longitu : %zu\n", 
-        longitu);
+    printf("calculo : %zu\n", sizeof(arreglo) / sizeof(arreglo[0]));
+    printf("longitu : %zu\n", longitu);
     return 0;
 }

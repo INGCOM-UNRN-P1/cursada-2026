@@ -15,10 +15,10 @@ int main(void)
     /* ERROR INTENCIONAL */
     arreglo[10] = 1234;
 
-    for(size_t i = 0; ;i++)
+    for (size_t i = 0;; i++)
     {
         arreglo[i] = 1234;
-        printf("arreglo[%zu] = %d\n",i,  arreglo[i]);
+        printf("arreglo[%zu] = %d\n", i, arreglo[i]);
     }
     printf("El programa no tiene un resultado definido.\n");
 

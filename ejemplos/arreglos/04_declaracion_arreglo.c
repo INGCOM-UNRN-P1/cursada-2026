@@ -26,8 +26,7 @@ int main(void)
         printf("%zu -> %d\n", i, arreglo[i]);
     }
 
-    printf("Capacidad: %zu elementos\n",
-        sizeof(arreglo) / sizeof(arreglo[0]));
+    printf("Capacidad: %zu elementos\n", sizeof(arreglo) / sizeof(arreglo[0]));
 
     return 0;
 }

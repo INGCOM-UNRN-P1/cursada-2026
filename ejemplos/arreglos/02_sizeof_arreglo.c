@@ -10,10 +10,8 @@ int main(void)
 {
     int arreglo[8] = {};
     size_t largo = sizeof(arreglo);
-    printf("sizeof(int) = %zu bytes\n", 
-            sizeof(int));
-    printf("sizeof(arreglo) = %zu bytes\n", 
-            sizeof(arreglo));
+    printf("sizeof(int) = %zu bytes\n", sizeof(int));
+    printf("sizeof(arreglo) = %zu bytes\n", sizeof(arreglo));
     printf("cantidad de elementos = %zu\n",
            sizeof(arreglo) / sizeof(arreglo[0]));
 

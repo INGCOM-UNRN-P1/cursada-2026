@@ -3,10 +3,12 @@
 /*
  * SITUACION: Uso claro de operadores de incremento prefijo y postfijo.
  * EXPLICACION: ++i incrementa la variable y evalua al nuevo valor.
- * i++ evalua al valor actual y luego realiza el incremento. Se usan en sentencias separadas para evitar ambiguedad.
+ * i++evalua al valor actual y luego realiza el incremento.Se usan en
+ * sentencias separadas para evitar ambiguedad.
  */
 
-int main(void) {
+int main(void)
+{
     int i = 5;
 
     // Uso claro y separado de prefijo y postfijo

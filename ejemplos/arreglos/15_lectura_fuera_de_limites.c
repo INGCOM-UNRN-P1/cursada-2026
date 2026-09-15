@@ -21,12 +21,11 @@ int main(void)
     printf("arreglo[0] = %d\n", arreglo[0]);
     printf("arreglo[4] = %d\n", arreglo[4]);
 
-    for(size_t i = 0; ;i++)
+    for (size_t i = 0;; i++)
     {
-        printf("arreglo[%zu] = %d\n",i,  arreglo[i]);
+        printf("arreglo[%zu] = %d\n", i, arreglo[i]);
     }
     /* ERROR INTENCIONAL */
-    
 
     return 0;
 }

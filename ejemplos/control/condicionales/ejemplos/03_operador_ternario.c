@@ -1,11 +1,13 @@
 #include <stdio.h>
 
 /*
- * SITUACION: Operador condicional ternario (? :).
- * EXPLICACION: Sintaxis compacta para asignaciones o retornos condicionales simples de la forma (condicion) ? exp1 : exp2.
+ * SITUACION : Operador condicional ternario ( ? : ).
+ * EXPLICACION: Sintaxis compacta para asignaciones o retornos condicionales
+ * simples de la forma (condicion) ? exp1 : exp2.
  */
 
-int main(void) {
+int main(void)
+{
     int edad = 20;
 
     // Uso limpio del operador ternario para asignaciones condicionales simples

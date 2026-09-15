@@ -1,5 +1,5 @@
 /* 01_sizeof_basico.c
- * 
+ *
  * Antes de hablar de arreglos necesitamos poder medir memoria.
  * sizeof no es una función: es un operador conocido por el compilador.
  * Observemos el tamaño de distintos tipos y variables.

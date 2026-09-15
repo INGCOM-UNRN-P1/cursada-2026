@@ -11,7 +11,7 @@ int main(void)
 {
     int arreglo[5] = {};
     size_t len = sizeof(arreglo) / sizeof(arreglo[0]);
-    for (size_t i = 0; i < len ; i++)
+    for (size_t i = 0; i < len; i++)
     {
         printf("arreglo[%zu] = %d\n", i, arreglo[i]);
     }

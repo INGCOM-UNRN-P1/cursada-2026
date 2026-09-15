@@ -10,8 +10,7 @@ int main(void)
 {
     int completa[5] = {1, 2, 3, 4, 5};
 
-    for (size_t i = 0; 
-        i < sizeof(completa) / sizeof(completa[0]); i++)
+    for (size_t i = 0; i < sizeof(completa) / sizeof(completa[0]); i++)
     {
         printf("completa[%zu] = %d\n", i, completa[i]);
     }

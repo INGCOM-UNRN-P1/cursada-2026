@@ -24,6 +24,6 @@ int main(void)
         printf("cadena[%zu] = %c\n", i, cadena[i]);
     }
     zaraza = 'b';
-    printf("%s\n", cadena+5);
+    printf("%s\n", cadena + 5);
     return 0;
 }

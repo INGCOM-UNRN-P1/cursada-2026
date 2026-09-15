@@ -16,13 +16,12 @@
  * @param largo Descripción del parámetro largo.
  * @return Descripción del valor de retorno.
  */
-int borrar(int* arreglo, size_t largo)
+int borrar(int *arreglo, size_t largo)
 {
     printf("\n\n\n");
     for (size_t i = 0; i < largo - 1; i++)
-    {   
-        printf("%d, ",*(arreglo + i));
-        
+    {
+        printf("%d, ", *(arreglo + i));
     }
     printf("\n\n\n");
     return arreglo[0];

@@ -15,7 +15,7 @@ int main(void)
 
     for (size_t i = 0; i < largo; i++)
     {
-        destino[i] = origen[i]*2;
+        destino[i] = origen[i] * 2;
     }
 
     for (size_t i = 0; i < largo; i++)

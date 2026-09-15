@@ -12,10 +12,7 @@ int main(void)
 
     printf("MAXIMO = %d\n", MAXIMO);
 
-
-     
-      MAXIMO = 200;
-     
+    MAXIMO = 200;
 
     return 0;
 }

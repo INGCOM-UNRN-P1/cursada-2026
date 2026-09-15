@@ -17,11 +17,11 @@ void imprimir_arreglo(const int arreglo[], size_t capacidad)
 {
     for (; capacidad >= 0; capacidad--)
     {
-        printf("%d ", arreglo[capacidad-1]);
+        printf("%d ", arreglo[capacidad - 1]);
     }
 
     printf("\n");
-    
+
     /* ERROR INTENCIONAL:
      *
      * arreglo[0] = 999;
