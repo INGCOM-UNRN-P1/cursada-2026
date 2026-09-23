@@ -34,7 +34,8 @@ int main(void)
         lista = nuevo;
     }
 
-    for (struct Nodo *actual = lista; actual != NULL; actual = actual->siguiente)
+    for (struct Nodo *actual = lista; actual != NULL;
+         actual = actual->siguiente)
     {
         printf("%d%c", actual->valor, actual->siguiente == NULL ? '\n' : ' ');
     }

@@ -12,6 +12,11 @@ struct Mensaje
     char *texto;
 };
 
+/**
+ * @brief Descripción de la función destruir_mensaje.
+ *
+ * @param mensaje Descripción del parámetro mensaje.
+ */
 void destruir_mensaje(struct Mensaje *mensaje)
 {
     if (mensaje != NULL)

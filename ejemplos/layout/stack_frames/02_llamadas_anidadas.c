@@ -7,6 +7,9 @@
 
 #include <stdio.h>
 
+/**
+ * @brief Descripción de la función nivel_3.
+ */
 void nivel_3(void)
 {
     int local = 3;
@@ -14,6 +17,9 @@ void nivel_3(void)
     printf("nivel_3: local = %d (direccion: %p)\n", local, (void *)&local);
 }
 
+/**
+ * @brief Descripción de la función nivel_2.
+ */
 void nivel_2(void)
 {
     int local = 2;
@@ -22,6 +28,9 @@ void nivel_2(void)
     nivel_3();
 }
 
+/**
+ * @brief Descripción de la función nivel_1.
+ */
 void nivel_1(void)
 {
     int local = 1;

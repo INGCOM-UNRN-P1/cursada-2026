@@ -1,12 +1,15 @@
 /* 01_marco_simple.c
  *
  * Cada llamada a una función crea un marco de pila (stack frame) que
- * contiene sus variables locales y parámetros. El marco se destruye
+ * contiene sus variables locales y parámetros.El marco se destruye
  * automáticamente al retornar la función.
  */
 
 #include <stdio.h>
 
+/**
+ * @brief Descripción de la función imprimir_marco.
+ */
 void imprimir_marco(void)
 {
     int valor_local = 5;

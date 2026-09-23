@@ -1,20 +1,26 @@
 /* 05_variables_locales_no_sobreviven.c
  *
- * Al retornar una función, su marco de pila se recicla. La misma
+ * Al retornar una función, su marco de pila se recicla.La misma
  * región de memoria puede reaparecer en la siguiente llamada porque
  * ningún dato persiste entre invocaciones de funciones distintas.
  */
 
 #include <stdio.h>
 
+/**
+ * @brief Descripción de la función primera_llamada.
+ */
 void primera_llamada(void)
 {
     int local = 111111111;
 
-    printf("primera_llamada: local = %d (direccion: %p)\n",
-           local, (void *)&local);
+    printf("primera_llamada: local = %d (direccion: %p)\n", local,
+           (void *)&local);
 }
 
+/**
+ * @brief Descripción de la función segunda_llamada.
+ */
 void segunda_llamada(void)
 {
     char pp;

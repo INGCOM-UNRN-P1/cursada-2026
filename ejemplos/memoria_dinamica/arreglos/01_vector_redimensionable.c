@@ -35,7 +35,7 @@ int main(void)
 
     for (size_t i = 0; i < cantidad; i++)
     {
-        printf("%d%c", vector[i], i + 1 == cantidad ? '\n' : ' ');
+        printf("%d%c", vector[i], i + cantidad == 1 ? '\n' : ' ');
     }
 
     free(vector);

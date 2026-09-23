@@ -1,5 +1,5 @@
 /* CONTRAEJEMPLO: comparar direcciones de objetos no relacionados no tiene
- * un orden garantizado por el estándar de C. NO ASUMIR el resultado.
+ * un orden garantizado por el estándar de C.NO ASUMIR el resultado.
  */
 
 #include <stdio.h>

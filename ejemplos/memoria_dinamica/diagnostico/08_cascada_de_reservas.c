@@ -1,11 +1,14 @@
 /*
  * vasquez: una lista enlazada con cleanup correcto ante cualquier fallo de
- * malloc. Sirve para recorrer todos los caminos de error: fallar en cada
+ * malloc.Sirve para recorrer todos los caminos de error: fallar en cada
  * llamada (1, 2, 3, ...), en cascada o de forma probabilística.
  *
- *   vasquez inject memoria_dinamica/diagnostico/08_cascada_de_reservas.c --fail-malloc-at 3 --check-leaks
- *   vasquez inject memoria_dinamica/diagnostico/08_cascada_de_reservas.c --fail-malloc-at 2 --cascade --check-leaks
- *   vasquez stress memoria_dinamica/diagnostico/08_cascada_de_reservas.c -n 20 -p 0.3
+ *   vasquez inject
+ * memoria_dinamica/diagnostico/08_cascada_de_reservas.c--fail-malloc-at 3
+ * --check-leaks vasquez inject
+ * memoria_dinamica/diagnostico/08_cascada_de_reservas.c--fail-malloc-at 2
+ * --cascade--check-leaks vasquez stress
+ * memoria_dinamica/diagnostico/08_cascada_de_reservas.c -n 20 -p 0.3
  */
 
 #include <stdio.h>
@@ -17,6 +20,11 @@ typedef struct nodo
     struct nodo *siguiente;
 } nodo_t;
 
+/**
+ * @brief Descripción de la función destruir.
+ *
+ * @param lista Descripción del parámetro lista.
+ */
 static void destruir(nodo_t *lista)
 {
     while (lista != NULL)
@@ -27,6 +35,12 @@ static void destruir(nodo_t *lista)
     }
 }
 
+/**
+ * @brief Descripción de la función construir.
+ *
+ * @param cantidad Descripción del parámetro cantidad.
+ * @return Descripción del valor de retorno.
+ */
 static nodo_t *construir(int cantidad)
 {
     nodo_t *lista = NULL;

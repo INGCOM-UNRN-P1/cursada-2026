@@ -1,21 +1,21 @@
 /*
  * nostromo: el vector crece con realloc de forma correcta (puntero temporal,
  * verificación de NULL), pero la condición de corte nunca se cumple:
- * 'cantidad' avanza de a 2 y el objetivo es impar. El programa pide memoria
+ * 'cantidad' avanza de a 2 y el objetivo es impar.El programa pide memoria
  * hasta agotar la del sistema.
  *
  * Ejecutar SOLO dentro de nostromo, con un límite de memoria:
  *
- *   gcc -std=c11 -g memoria_dinamica/diagnostico/10_crecimiento_sin_limite.c -o /tmp/crecimiento
- *   nostromo run /tmp/crecimiento --memory 32
+ *   gcc -std=c11 -g memoria_dinamica/diagnostico/10_crecimiento_sin_limite.c -o
+ * /tmp/crecimiento nostromo run /tmp/crecimiento--memory 32
  *
- * Con 32 MB, realloc devuelve NULL cerca de ese límite. Como el código maneja
+ * Con 32 MB, realloc devuelve NULL cerca de ese límite.Como el código maneja
  * el error, el programa informa "sin memoria" y termina con EXIT_FAILURE
  * (nostromo lo clasifica como NON_ZERO). Fuera del sandbox el mismo programa
  * consumiría toda la RAM de la máquina antes de fallar.
  *
  * Por el mismo motivo NO ejecutarlo con hal ni con vasquez: ninguno de los
- * dos limita la memoria. vasquez corta a los 3 s, pero en ese tiempo el
+ * dos limita la memoria.vasquez corta a los 3 s, pero en ese tiempo el
  * programa ya puede haber reservado varios GB.
  *
  * Corrección: cortar con 'cantidad < objetivo' en lugar de '!='.

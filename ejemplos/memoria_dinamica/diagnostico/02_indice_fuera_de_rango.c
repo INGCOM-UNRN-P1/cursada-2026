@@ -1,16 +1,23 @@
 /*
  * Diagnóstico con hal: un índice fuera de rango sobre un bloque dinámico
- * lejos del final termina en una caída. hal muestra la pila de llamadas y el
+ * lejos del final termina en una caída.hal muestra la pila de llamadas y el
  * valor del índice en el momento de la señal.
  *
- *   daedalus compile memoria_dinamica/diagnostico/02_indice_fuera_de_rango.c -o /tmp/rango
- *   nostromo run /tmp/rango                     # SEGFAULT
- *   hal check memoria_dinamica/diagnostico/02_indice_fuera_de_rango.c
+ *   daedalus compile memoria_dinamica/diagnostico/02_indice_fuera_de_rango.c -o
+ * /tmp/rango nostromo run /tmp/rango                     # SEGFAULT hal check
+ * memoria_dinamica/diagnostico/02_indice_fuera_de_rango.c
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * @brief Descripción de la función sumar.
+ *
+ * @param valores Descripción del parámetro valores.
+ * @param cantidad Descripción del parámetro cantidad.
+ * @return Descripción del valor de retorno.
+ */
 static long sumar(const int *valores, size_t cantidad)
 {
     long total = 0;

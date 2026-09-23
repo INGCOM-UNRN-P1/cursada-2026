@@ -1,12 +1,15 @@
 /* 03_pila_variables_locales.c
  *
  * Las variables locales automáticas viven en el marco de pila de la
- * función que las declara. Su dirección cambia según la profundidad
+ * función que las declara.Su dirección cambia según la profundidad
  * de la llamada, a diferencia de una variable global.
  */
 
 #include <stdio.h>
 
+/**
+ * @brief Descripción de la función mostrar_direccion_local.
+ */
 void mostrar_direccion_local(void)
 {
     int local = 1;

@@ -1,11 +1,13 @@
 /*
  * vasquez: la segunda reserva verifica NULL, pero al abandonar no libera la
- * primera. El camino feliz no pierde memoria; el camino de error sí. Solo se
- * observa forzando el fallo de la segunda llamada a malloc. vasquez da el
+ * primera.El camino feliz no pierde memoria; el camino de error sí.Solo se
+ * observa forzando el fallo de la segunda llamada a malloc.vasquez da el
  * escenario por manejado (no hay caída), pero advierte la reserva previa sin
  * liberar en la rama de error.
  *
- *   vasquez inject memoria_dinamica/diagnostico/05_fuga_en_camino_de_error.c --fail-malloc-at 2 --check-leaks
+ *   vasquez inject
+ * memoria_dinamica/diagnostico/05_fuga_en_camino_de_error.c--fail-malloc-at 2
+ * --check-leaks
  *
  * La versión correcta es robustos/02_cleanup_contra_error.c.
  */

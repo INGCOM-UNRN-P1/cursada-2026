@@ -2,7 +2,7 @@
  *
  * Comparación ilustrativa de direcciones entre datos globales
  * inicializados, bss, heap y pila para visualizar que provienen de
- * regiones distintas. El orden exacto entre ellas no está garantizado
+ * regiones distintas.El orden exacto entre ellas no está garantizado
  * por el estándar de C y depende del sistema operativo.
  */
 
@@ -22,7 +22,8 @@ int main(void)
         return EXIT_FAILURE;
     }
 
-    printf("datos (global inicializada):     %p\n", (void *)&global_inicializada);
+    printf("datos (global inicializada):     %p\n",
+           (void *)&global_inicializada);
     printf("bss   (global sin inicializar):   %p\n", (void *)&global_bss);
     printf("heap  (malloc):                   %p\n", (void *)dinamica);
     printf("pila  (variable local):           %p\n", (void *)&local);

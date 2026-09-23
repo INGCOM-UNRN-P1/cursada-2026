@@ -1,11 +1,13 @@
 /*
  * vasquez: asignar el resultado de realloc sobre el mismo puntero pierde el
- * bloque original cuando realloc falla. Se fuerza el fallo del primer
+ * bloque original cuando realloc falla.Se fuerza el fallo del primer
  * realloc: vasquez informa la caída por puntero nulo y el bloque perdido.
  *
- *   gcc -std=c11 -g memoria_dinamica/diagnostico/06_realloc_sin_temporal.c -o /tmp/sin_temporal
- *   nostromo run /tmp/sin_temporal              # 4: sin fallos, parece correcto
- *   vasquez inject memoria_dinamica/diagnostico/06_realloc_sin_temporal.c --fail-realloc-at 1 --check-leaks
+ *   gcc -std=c11 -g memoria_dinamica/diagnostico/06_realloc_sin_temporal.c -o
+ * /tmp/sin_temporal nostromo run /tmp/sin_temporal              # 4: sin
+ * fallos, parece correcto vasquez inject
+ * memoria_dinamica/diagnostico/06_realloc_sin_temporal.c--fail-realloc-at 1
+ * --check-leaks
  *
  * La versión correcta es arreglos/02_realloc_seguro.c.
  */

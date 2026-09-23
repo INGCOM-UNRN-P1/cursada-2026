@@ -11,8 +11,8 @@ int contador_global = 100;
 
 int main(void)
 {
-    printf("contador_global = %d (direccion: %p)\n",
-           contador_global, (void *)&contador_global);
+    printf("contador_global = %d (direccion: %p)\n", contador_global,
+           (void *)&contador_global);
 
     return 0;
 }

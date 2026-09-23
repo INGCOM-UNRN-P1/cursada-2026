@@ -1,9 +1,10 @@
 /*
  * vasquez: la misma lógica que 03_malloc_sin_verificar.c, pero verificando
- * el resultado de malloc. Bajo inyección de fallos el programa termina de
+ * el resultado de malloc.Bajo inyección de fallos el programa termina de
  * forma controlada con EXIT_FAILURE en lugar de caerse.
  *
- *   vasquez inject memoria_dinamica/diagnostico/04_malloc_verificado.c --fail-malloc-at 1
+ *   vasquez inject
+ * memoria_dinamica/diagnostico/04_malloc_verificado.c--fail-malloc-at 1
  */
 
 #include <stdio.h>

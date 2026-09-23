@@ -6,14 +6,15 @@
 /*
  * SOLUCION: Validar el divisor antes de una division entera.
  * EXPLICACION: La division entera solo esta definida si el divisor es
- * distinto de 0 y el cociente entra en el tipo. Para int, el unico cociente
+ * distinto de 0 y el cociente entra en el tipo.Para int, el unico cociente
  * que no entra es INT_MIN / -1. La funcion informa si pudo dividir y deja el
  * resultado en un parametro de salida.
  *
  * VERIFICACION (desde la raiz de ejemplos/):
  *
- *   gcc -std=c11 -g aritmetica/ejemplos/09_division_entera_verificada_segura.c -o /tmp/reparto_ok
- *   nostromo check /tmp/reparto_ok aritmetica/casos_reparto/   # 4/4 aprobados
+ *   gcc -std=c11 -g aritmetica/ejemplos/09_division_entera_verificada_segura.c
+ * -o /tmp/reparto_ok nostromo check /tmp/reparto_ok aritmetica/casos_reparto/
+ * # 4/4 aprobados
  *
  * Comparar con ../contraejemplos/09_division_entera_por_cero_error.c, que
  * falla con la misma suite de casos.

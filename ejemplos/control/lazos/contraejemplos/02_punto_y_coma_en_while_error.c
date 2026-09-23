@@ -15,10 +15,10 @@ int main(void)
            "bloqueante.\n");
 
     /*
-      int k = 0;
-      while (k < 5); {
-          k++;
-      }
+        int k = 0;
+        while (k < 5); {
+            k++;
+        }
     */
     return 0;
 }
