@@ -9,7 +9,7 @@
 
 void primera_llamada(void)
 {
-    int local = 111;
+    int local = 111111111;
 
     printf("primera_llamada: local = %d (direccion: %p)\n",
            local, (void *)&local);
@@ -17,12 +17,13 @@ void primera_llamada(void)
 
 void segunda_llamada(void)
 {
+    char pp;
     int local;
 
     /* El valor observado puede coincidir con el de la llamada anterior
      * porque ambas funciones reutilizan la misma región de la pila. */
-    printf("segunda_llamada: local sin inicializar (direccion: %p)\n",
-           (void *)&local);
+    printf("segunda_llamada: local sin inicializar (direccion: %p)<%c|%d>\n",
+           (void *)&local, local, pp);
 }
 
 int main(void)

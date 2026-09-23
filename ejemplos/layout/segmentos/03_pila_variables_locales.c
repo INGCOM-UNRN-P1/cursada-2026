@@ -11,7 +11,7 @@ void mostrar_direccion_local(void)
 {
     int local = 1;
 
-    printf("local en mostrar_direccion_local (direccion en pila): %p\n",
+    printf("local en mostrar_direccion_local (direccion en pila): \t%p\n",
            (void *)&local);
 }
 
@@ -19,7 +19,7 @@ int main(void)
 {
     int local = 0;
 
-    printf("local en main (direccion en pila): %p\n", (void *)&local);
+    printf("local en main (direccion en pila): \t\t\t%p\n", (void *)&local);
     mostrar_direccion_local();
 
     return 0;

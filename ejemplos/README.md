@@ -173,11 +173,16 @@ strings.
 Ejecuta binarios en un sandbox (Bubblewrap + `setrlimit`) con límites de CPU y
 memoria, y evalúa casos `.in`/`.out`.
 
-| Comando                                                       | Qué hace                      |
-| ------------------------------------------------------------- | ----------------------------- |
-| `nostromo exec --timeout 2s --mem 32M -- ./bin/programa`      | Ejecuta con cuotas estrictas. |
-| `nostromo run --binary ./bin/programa --testcases testcases/` | Corre la suite `.in`/`.out`.  |
-| `nostromo gen-testcases --binary ./bin/canon -i inputs/`      | Genera los `.out` esperados.  |
+| Comando                                               | Qué hace                                                 |
+| ----------------------------------------------------- | -------------------------------------------------------- |
+| `nostromo run ./bin/programa --timeout 2 --memory 32` | Ejecuta con cuotas estrictas (segundos y MB).            |
+| `nostromo run ./bin/programa --stdin "10 0"`          | Ídem, enviando datos por la entrada estándar.            |
+| `nostromo check ./bin/programa casos/`                | Corre la suite `.in`/`.out`.                             |
+| `nostromo stress ./bin/programa caso.in -n 100`       | Repite la ejecución para detectar resultados inestables. |
+
+El resultado se clasifica como `SEGFAULT`, `FPE`, `ABORT`, `TIMEOUT` o
+`NON_ZERO`. Es el primer paso con cualquier contraejemplo: si es una señal,
+seguir con `hal`; si es `TIMEOUT`, `hal` no sirve.
 
 ### `bishop` — trazado visual de memoria
 
@@ -203,11 +208,15 @@ calidad de los tests.
 Diagnostica `SIGSEGV`, `SIGABRT`, `SIGFPE`: extrae el stack trace con GDB y lo
 explica en cristiano.
 
-| Comando                             | Qué hace                                            |
-| ----------------------------------- | --------------------------------------------------- |
-| `hal inspect ./bin/programa [args]` | Ejecuta, captura la caída y la diagnostica.         |
-| `hal core ./bin/programa core.dump` | Análisis post-mortem de un core dump.               |
-| `hal valgrind ./bin/programa`       | Corre Valgrind y traduce fugas y accesos inválidos. |
+| Comando                                  | Qué hace                                                  |
+| ---------------------------------------- | --------------------------------------------------------- |
+| `hal check programa.c [args]`            | Compila, ejecuta, captura la caída y la diagnostica.      |
+| `hal check ./bin/programa --stdin "..."` | Ídem sobre un binario, con datos por la entrada estándar. |
+| `hal valgrind ./bin/programa`            | Corre Valgrind y traduce fugas y accesos inválidos.       |
+| `hal advice`                             | Consejos defensivos para evitar caídas.                   |
+
+`hal` no tiene límite de tiempo ni de memoria propios: con un programa que se
+cuelga, espera 10 s a GDB y termina con error. Usarlo después de `nostromo`.
 
 ### `tetsuo` — AddressSanitizer / UBSan
 
@@ -224,11 +233,18 @@ Compila con sanitizers y traduce sus reportes.
 Intercepta llamadas a glibc con `LD_PRELOAD`, sin recompilar, para probar los
 caminos de error.
 
-| Comando                                                              | Qué hace                                            |
-| -------------------------------------------------------------------- | --------------------------------------------------- |
-| `vasquez inject --target ./bin/programa --fail-malloc-at 3`          | La 3.ª llamada a `malloc` devuelve `NULL`.          |
-| `vasquez inject --target ./bin/programa --faults "fopen:1,malloc:2"` | Fallos secuenciales combinados.                     |
-| `vasquez check-leaks ./bin/programa`                                 | Verifica que no haya fugas en los caminos de error. |
+| Comando                                                      | Qué hace                                                   |
+| ------------------------------------------------------------ | ---------------------------------------------------------- |
+| `vasquez inject programa.c --fail-malloc-at 3`               | La 3.ª llamada a `malloc` devuelve `NULL`.                 |
+| `vasquez inject programa.c --fail-realloc-at 1`              | Ídem con `realloc` (también `--fail-calloc-at`).           |
+| `vasquez inject programa.c --faults "fopen:1,malloc:2"`      | Fallos secuenciales combinados.                            |
+| `vasquez inject programa.c --fail-malloc-at 2 --cascade`     | A partir de la 2.ª llamada, todas fallan.                  |
+| `vasquez inject programa.c --fail-malloc-at 2 --check-leaks` | Verifica que no haya fugas en los caminos de error.        |
+| `vasquez inject programa.c --garbage-memory --json`          | Rellena cada bloque con `0xA5` (lecturas sin inicializar). |
+| `vasquez stress programa.c -n 20 -p 0.3`                     | 20 corridas con fallos aleatorios (30 % por llamada).      |
+
+`vasquez` corta cada escenario a los 3 s (lo informa como `INFINITE_LOOP`),
+pero no limita la memoria.
 
 
 ---
@@ -244,22 +260,33 @@ spunkmeyer detect memoria_dinamica/
 bishop trace -- ./bin/direccion
 ```
 
-Analizar un contraejemplo sin arriesgar la terminal:
+Analizar un contraejemplo sin arriesgar la terminal: primero `nostromo`
+clasifica el fallo, después `hal` lo explica si fue una señal.
 
 ```bash
-tetsuo compile punteros/colgantes/01_retorno_de_variable_local.c -o bin/colgante
-tetsuo run -- ./bin/colgante          # explica el acceso inválido
-hal inspect ./bin/colgante            # alternativa sin sanitizers
-nostromo exec --timeout 2s --mem 32M -- ./bin/colgante
+gcc -std=c11 -g aritmetica/contraejemplos/09_division_entera_por_cero_error.c -o bin/reparto
+nostromo run ./bin/reparto --stdin "10 0"                    # FPE
+nostromo check ./bin/reparto aritmetica/casos_reparto/       # 2/4 aprobados
+hal check ./bin/reparto --stdin "10 0"                       # divisor 'personas' = 0
 ```
+
+Contraejemplos que **no** se caen, y por eso solo se ejecutan con `nostromo`:
+
+| Archivo                                                                    | Resultado de `nostromo`     |
+| -------------------------------------------------------------------------- | --------------------------- |
+| `control/lazos/contraejemplos/04_lazo_infinito_rango_del_tipo_error.c`     | `TIMEOUT`                   |
+| `layout/contraejemplos/03_caso_base_inalcanzable.c` (argumento `0`)        | `SEGFAULT` por pila agotada |
+| `memoria_dinamica/diagnostico/10_crecimiento_sin_limite.c` (`--memory 32`) | `NON_ZERO`: sin memoria     |
 
 Probar la robustez de los ejemplos de memoria dinámica:
 
 ```bash
-daedalus compile memoria_dinamica/robustos/02_cleanup_contra_error.c -o bin/robusto
-vasquez inject --target ./bin/robusto --fail-malloc-at 1
-hal valgrind ./bin/robusto
+vasquez inject memoria_dinamica/robustos/02_cleanup_contra_error.c --fail-malloc-at 1
+vasquez inject memoria_dinamica/diagnostico/05_fuga_en_camino_de_error.c --fail-malloc-at 2 --check-leaks
 ```
+
+El recorrido completo con `nostromo`, `hal` y `vasquez` está en
+`memoria_dinamica/diagnostico/README.md`.
 
 ### Integración en el `Makefile`
 

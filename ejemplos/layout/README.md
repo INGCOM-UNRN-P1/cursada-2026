@@ -15,7 +15,7 @@ opciones de enlazado; el estándar de C no los garantiza.
 | --- | --- |
 | `segmentos/` | Dónde vive cada tipo de variable: datos, bss, heap y pila. |
 | `stack_frames/` | Creación, anidamiento y destrucción de marcos de pila. |
-| `contraejemplos/` | Suposiciones inválidas sobre direcciones y recursión sin límite. |
+| `contraejemplos/` | Suposiciones inválidas sobre direcciones, recursión sin límite y caso base inalcanzable. |
 
 ## Recorrido sugerido
 
@@ -38,8 +38,19 @@ Casos relacionados en otros directorios:
   con la pila para el mismo tipo de datos.
 
 Los archivos de `contraejemplos/` están destinados a inspección y
-diagnóstico. Compilan, pero **no deben ejecutarse**: contienen comportamiento
-indefinido o provocan un desbordamiento de pila intencional.
+diagnóstico. Compilan, pero **no deben ejecutarse directamente**: contienen
+comportamiento indefinido o provocan un desbordamiento de pila intencional.
+Para verlos fallar, ejecutarlos dentro de `nostromo`, que corta la ejecución
+por tiempo y memoria:
+
+```sh
+gcc -std=c11 -g contraejemplos/03_caso_base_inalcanzable.c -o /tmp/factorial
+nostromo run /tmp/factorial 5        # 120
+nostromo run /tmp/factorial 0        # SEGFAULT: la pila se agotó
+```
+
+`hal` no sirve para los desbordes de pila: con cientos de miles de marcos,
+GDB supera su tiempo límite.
 
 ## Compilación
 

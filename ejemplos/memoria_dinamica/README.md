@@ -14,6 +14,7 @@ separado con C99.
 | `estructuras/` | `struct`, nodos enlazados y matrices almacenadas en memoria dinámica. |
 | `robustos/` | Patrones de ownership, overflow de tamaños y cleanup centralizado. |
 | `contraejemplos/` | Fugas, uso después de liberar, doble liberación y `realloc` inseguro. |
+| `diagnostico/` | Ejemplos para ejecutar bajo `nostromo` (sandbox), `hal` (caídas) y `vasquez` (inyección de fallos). |
 
 ## Recorrido sugerido
 
@@ -30,6 +31,7 @@ separado con C99.
 11. `estructuras/02_lista_enlazada.c`
 12. `robustos/01_verificar_overflow.c`
 13. `robustos/02_cleanup_contra_error.c`
+14. `diagnostico/` (ver su `README.md`)
 
 Los archivos de `contraejemplos/` están destinados a inspección y diagnóstico.
 Algunos compilan, pero no deben ejecutarse porque contienen comportamiento
